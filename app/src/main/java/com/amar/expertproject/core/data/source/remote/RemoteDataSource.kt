@@ -3,22 +3,17 @@ package com.amar.expertproject.core.data.source.remote
 import android.util.Log
 import com.amar.expertproject.core.data.source.remote.network.ApiResponse
 import com.amar.expertproject.core.data.source.remote.network.ApiService
+import com.amar.expertproject.core.data.source.remote.response.DetailRestaurantResponse
 import com.amar.expertproject.core.data.source.remote.response.RestaurantResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RemoteDataSource private constructor(private val apiService: ApiService){
-    companion object {
-        @Volatile
-        private var instance: RemoteDataSource? = null
-
-        fun getInstance(service: ApiService): RemoteDataSource =
-            instance ?: synchronized(this) {
-                instance ?: RemoteDataSource(service)
-            }
-    }
+@Singleton
+class RemoteDataSource @Inject constructor(private val apiService: ApiService){
 
     suspend fun getAllRestaurant(): Flow<ApiResponse<List<RestaurantResponse>>> {
         //get data from remote api
@@ -31,6 +26,18 @@ class RemoteDataSource private constructor(private val apiService: ApiService){
                 } else {
                     emit(ApiResponse.Empty)
                 }
+            } catch (e : Exception){
+                emit(ApiResponse.Error(e.toString()))
+                Log.e("RemoteDataSource", e.toString())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getDetailRestaurant(id: String): Flow<ApiResponse<DetailRestaurantResponse>> {
+        return flow {
+            try {
+                val response = apiService.getDetail(id)
+                emit(ApiResponse.Success(response))
             } catch (e : Exception){
                 emit(ApiResponse.Error(e.toString()))
                 Log.e("RemoteDataSource", e.toString())

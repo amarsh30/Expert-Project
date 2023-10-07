@@ -14,6 +14,9 @@ interface RestaurantDao {
     @Query("SELECT * FROM restaurant")
     fun getAllRestaurant(): Flow<List<RestaurantEntity>>
 
+    @Query("SELECT * FROM restaurant WHERE id = :restaurantId ")
+    fun getDetailRestaurant(restaurantId: String): Flow<RestaurantEntity>
+
     @Query("SELECT * FROM restaurant where isFavorite = 1")
     fun getFavoriteRestaurant(): Flow<List<RestaurantEntity>>
 

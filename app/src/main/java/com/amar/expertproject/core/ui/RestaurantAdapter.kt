@@ -33,13 +33,13 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ListViewHolder>
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemListRestaurantBinding.bind(itemView)
-        fun bind(data: Restaurant) {
+        fun bind(restaurant: Restaurant) {
             with(binding) {
                 Glide.with(itemView.context)
-                    .load(data.pictureId)
+                    .load("https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}")
                     .into(ivItemImage)
-                tvItemTitle.text = data.name
-                tvItemSubtitle.text = data.description
+                tvItemTitle.text = restaurant.name
+                tvItemSubtitle.text = restaurant.description
             }
         }
 

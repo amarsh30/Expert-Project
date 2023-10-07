@@ -1,6 +1,5 @@
 package com.amar.expertproject.core.data.source.local.entity
 
-import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,8 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "restaurant")
 data class RestaurantEntity (
     @PrimaryKey
-    @NonNull
-    @ColumnInfo(name = "restaurantId")
+    @ColumnInfo(name = "id")
     var restaurantId: String,
 
     @ColumnInfo(name = "name")

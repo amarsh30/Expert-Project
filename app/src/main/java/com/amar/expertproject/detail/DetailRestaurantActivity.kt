@@ -1,22 +1,27 @@
 package com.amar.expertproject.detail
 
 import android.os.Bundle
+import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.amar.expertproject.R
-import com.amar.expertproject.core.domain.model.Restaurant
-import com.amar.expertproject.core.ui.ViewModelFactory
+import com.amar.expertproject.core.data.Resource
 import com.amar.expertproject.databinding.ActivityDetailRestaurantBinding
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailRestaurantActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_DATA = "extra_data"
     }
 
-    private lateinit var detailRestaurantViewModel: DetailRestaurantViewModel
+    private val detailRestaurantViewModel: DetailRestaurantViewModel by viewModels()
+
+//    private var _binding: ActivityDetailRestaurantBinding? = null
+//    private val binding get() = _binding!!
     private lateinit var binding: ActivityDetailRestaurantBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,30 +30,45 @@ class DetailRestaurantActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val factory = ViewModelFactory.getInstance(this)
-        detailRestaurantViewModel = ViewModelProvider(this, factory)[DetailRestaurantViewModel::class.java]
-
-        val detailRestaurant = intent.getParcelableExtra<Restaurant>(EXTRA_DATA)
+        val detailRestaurant = intent.getStringExtra(EXTRA_DATA) ?: ""
         showDetailRestaurant(detailRestaurant)
     }
 
-    private fun showDetailRestaurant(detailRestaurant: Restaurant?) {
-        detailRestaurant?.let {
-            supportActionBar?.title = detailRestaurant.name
-            binding.content.tvDetailDescription.text = detailRestaurant.description
-            Glide.with(this@DetailRestaurantActivity)
-                .load(detailRestaurant.pictureId)
-                .into(binding.ivDetailImage)
+    private fun showDetailRestaurant(idRestaurant: String) {
+        detailRestaurantViewModel.getRestaurantDetail(idRestaurant).observe(this) { resources ->
+            when (resources) {
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
 
-            var statusFavorite = detailRestaurant.isFavorite
-            setStatusFavorite(statusFavorite)
-            binding.fab.setOnClickListener {
-                statusFavorite = !statusFavorite
-                detailRestaurantViewModel.setFavoriteRestaurant(detailRestaurant, statusFavorite)
-                setStatusFavorite(statusFavorite)
+                is Resource.Success -> {
+                    resources.data?.let {
+                        restaurant ->
+                        binding.apply {
+                            progressBar.visibility = View.GONE
+                            tvDetailName.text = restaurant.name
+                            content.tvDetailDescription.text = restaurant.description
+                        }
+                        Glide.with(this).load("https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}")
+                            .into(binding.ivDetailImage)
+
+                        var statusFavorite = restaurant.isFavorite
+                        setStatusFavorite(statusFavorite)
+                        binding.fab.setOnClickListener {
+                            statusFavorite = !statusFavorite
+                            detailRestaurantViewModel.setFavoriteRestaurant(restaurant, statusFavorite)
+                            setStatusFavorite(statusFavorite)
+                    }
+                }
+            }
+                is Resource.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    binding.viewError.root.visibility = View.VISIBLE
+                    binding.viewError.tvError.text = resources.message ?: getString(R.string.something_wrong)
+                }
+        }
             }
         }
-    }
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
         if (statusFavorite) {

@@ -4,8 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
+        android:name=".RestaurantApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,7 +17,8 @@
         tools:targetApi="31">
         <activity
             android:name=".detail.DetailRestaurantActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.ExpertProject.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

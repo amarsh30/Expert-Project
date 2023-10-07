@@ -2,22 +2,25 @@ package com.amar.expertproject.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amar.expertproject.R
 import com.amar.expertproject.core.data.Resource
 import com.amar.expertproject.core.ui.RestaurantAdapter
-import com.amar.expertproject.core.ui.ViewModelFactory
 import com.amar.expertproject.databinding.FragmentHomeBinding
 import com.amar.expertproject.detail.DetailRestaurantActivity
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 
 class HomeFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -37,13 +40,11 @@ class HomeFragment : Fragment() {
 
             val restaurantAdapter = RestaurantAdapter()
             restaurantAdapter.onItemClick = { selectedData ->
+                Log.d("On Klik", "$selectedData")
                 val intent = Intent(activity, DetailRestaurantActivity::class.java)
-                intent.putExtra(DetailRestaurantActivity.EXTRA_DATA, selectedData)
+                intent.putExtra(DetailRestaurantActivity.EXTRA_DATA, selectedData.restaurantId)
                 startActivity(intent)
             }
-
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
             homeViewModel.restaurant.observe(viewLifecycleOwner, { restaurant ->
                 if (restaurant != null) {
@@ -59,7 +60,6 @@ class HomeFragment : Fragment() {
                             binding.viewError.tvError.text = restaurant.message ?: getString(R.string.something_wrong)
                         }
 
-                        else -> {}
                     }
                 }
             })
