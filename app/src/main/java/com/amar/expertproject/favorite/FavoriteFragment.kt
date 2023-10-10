@@ -37,14 +37,15 @@ class FavoriteFragment : Fragment() {
             val restaurantAdapter = RestaurantAdapter()
             restaurantAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailRestaurantActivity::class.java)
-                intent.putExtra(DetailRestaurantActivity.EXTRA_DATA, selectedData)
+                intent.putExtra(DetailRestaurantActivity.EXTRA_DATA, selectedData.restaurantId)
                 startActivity(intent)
             }
 
-            favoriteViewModel.favoriteRestaurant.observe(viewLifecycleOwner, { dataRestaurant ->
+            favoriteViewModel.favoriteRestaurant.observe(viewLifecycleOwner) { dataRestaurant ->
+                binding.viewEmpty.root.visibility =
+                    if (dataRestaurant.isNotEmpty()) View.GONE else View.VISIBLE
                 restaurantAdapter.setData(dataRestaurant)
-                binding.viewEmpty.root.visibility = if (dataRestaurant.isNotEmpty()) View.GONE else View.VISIBLE
-            })
+            }
 
             with(binding.rvRestaurant) {
                 layoutManager = LinearLayoutManager(context)

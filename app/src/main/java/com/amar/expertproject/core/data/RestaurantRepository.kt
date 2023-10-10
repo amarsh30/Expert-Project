@@ -51,10 +51,7 @@ class RestaurantRepository @Inject constructor(
     override fun getDetailRestaurant(id: String): Flow<Resource<Restaurant>> =
         object : NetworkBoundResource<Restaurant, DetailRestaurantResponse>() {
         override fun loadFromDB(): Flow<Restaurant> {
-            val detail = localDataSource.getDetailRestaurant(id)
-            Log.d("ID Res:", "$id")
             return localDataSource.getDetailRestaurant(id).map {
-                Log.d("Data Mapper", "${it.restaurantId}")
                 dataMapper.mapEntitiesToDomain(it)
 
             }
