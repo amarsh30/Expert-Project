@@ -34,7 +34,7 @@ class RestaurantRepository @Inject constructor(
                 }
             }
 
-            override fun shouldFetch(data: List<Restaurant>?): Boolean = true
+            override fun shouldFetch(data: List<Restaurant>?): Boolean = data.isNullOrEmpty()
 
             override suspend fun createCall(): Flow<ApiResponse<List<RestaurantResponse>>> =
                 remoteDataSource.getAllRestaurant()
@@ -57,7 +57,12 @@ class RestaurantRepository @Inject constructor(
             }
         }
 
-        override fun shouldFetch(data: Restaurant?): Boolean = true
+        override fun shouldFetch(data: Restaurant?): Boolean {
+            return  data?.run {
+                name.isNullOrEmpty() || pictureId.isNullOrEmpty() || description.isNullOrEmpty() || rating == null || city.isNullOrEmpty()
+            } ?: false
+
+        }
 
         override suspend fun createCall(): Flow<ApiResponse<DetailRestaurantResponse>> =
             remoteDataSource.getDetailRestaurant(id)

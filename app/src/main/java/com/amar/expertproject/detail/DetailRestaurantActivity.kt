@@ -1,6 +1,5 @@
 package com.amar.expertproject.detail
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,7 +11,6 @@ import com.amar.expertproject.core.data.Resource
 import com.amar.expertproject.databinding.ActivityDetailRestaurantBinding
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.text.Typography.dagger
 
 @AndroidEntryPoint
 class DetailRestaurantActivity : AppCompatActivity() {
@@ -23,8 +21,6 @@ class DetailRestaurantActivity : AppCompatActivity() {
 
     private val detailRestaurantViewModel: DetailRestaurantViewModel by viewModels()
 
-//    private var _binding: ActivityDetailRestaurantBinding? = null
-//    private val binding get() = _binding!!
     private lateinit var binding: ActivityDetailRestaurantBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +29,7 @@ class DetailRestaurantActivity : AppCompatActivity() {
 
         val detailRestaurant = intent.getStringExtra(EXTRA_DATA) ?: ""
         showDetailRestaurant(detailRestaurant)
+
     }
 
     private fun showDetailRestaurant(idRestaurant: String) {
@@ -43,8 +40,7 @@ class DetailRestaurantActivity : AppCompatActivity() {
                 }
 
                 is Resource.Success -> {
-                    resources.data?.let {
-                        restaurant ->
+                    resources.data?.let { restaurant ->
                         binding.apply {
                             progressBar.visibility = View.GONE
                             tvDetailName.text = restaurant.name
@@ -52,7 +48,8 @@ class DetailRestaurantActivity : AppCompatActivity() {
                             tvDetailCity.text = restaurant.city
                             tvDetailRating.text = restaurant.rating.toString()
                         }
-                        Glide.with(this).load("https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}")
+                        Glide.with(this)
+                            .load("https://restaurant-api.dicoding.dev/images/large/${restaurant.pictureId}")
                             .into(binding.ivDetailImage)
 
                         var statusFavorite = restaurant.isFavorite
@@ -60,26 +57,45 @@ class DetailRestaurantActivity : AppCompatActivity() {
                         binding.fab.setOnClickListener {
                             Log.d("Status Favorite", "sebelum : $statusFavorite")
                             statusFavorite = !statusFavorite
-                            detailRestaurantViewModel.setFavoriteRestaurant(restaurant, statusFavorite)
+                            detailRestaurantViewModel.setFavoriteRestaurant(
+                                restaurant,
+                                statusFavorite
+                            )
                             Log.d("Status Favorite", "setelah : $statusFavorite")
                             setStatusFavorite(statusFavorite)
                         }
+                    }
                 }
-            }
+
                 is Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                     binding.viewError.root.visibility = View.VISIBLE
-                    binding.viewError.tvError.text = resources.message ?: getString(R.string.something_wrong)
+                    binding.viewError.tvError.text =
+                        resources.message ?: getString(R.string.something_wrong)
                 }
-        }
             }
         }
 
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
+    }
+
     private fun setStatusFavorite(statusFavorite: Boolean) {
         if (statusFavorite) {
-            binding.fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white))
+            binding.fab.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_favorite_white
+                )
+            )
         } else {
-            binding.fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_not_favorite_white))
+            binding.fab.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_not_favorite_white
+                )
+            )
         }
     }
 }
