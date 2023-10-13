@@ -21,6 +21,17 @@
             tools:srcCompat="@tools:sample/avatars"
             android:contentDescription="@string/image_description" />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#7F000000"
+            app:layout_constraintBottom_toBottomOf="@+id/ivDetailImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvDetailName"
+            app:layout_constraintVertical_bias="1.0" />
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
@@ -45,13 +56,13 @@
 
         <TextView
             android:id="@+id/tvDetailName"
+            style="@style/TextAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="20dp"
             android:text="@string/name_restaurant"
-            style="@style/TextAppearance"
             app:layout_constraintBottom_toBottomOf="@+id/ivDetailImage"
             app:layout_constraintStart_toStartOf="@+id/ivDetailImage" />
 
