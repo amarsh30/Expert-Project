@@ -16,7 +16,6 @@ import javax.inject.Singleton
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
 
     suspend fun getAllRestaurant(): Flow<ApiResponse<List<RestaurantResponse>>> {
-        //get data from remote api
         return flow {
             try {
                 val response = apiService.getAllList()

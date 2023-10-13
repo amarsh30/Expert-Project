@@ -2,7 +2,6 @@ package com.amar.expertproject.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +39,6 @@ class HomeFragment : Fragment() {
 
             val restaurantAdapter = RestaurantAdapter()
             restaurantAdapter.onItemClick = { selectedData ->
-                Log.d("On Klik", "$selectedData")
                 val intent = Intent(activity, DetailRestaurantActivity::class.java)
                 intent.putExtra(DetailRestaurantActivity.EXTRA_DATA, selectedData.restaurantId)
                 startActivity(intent)

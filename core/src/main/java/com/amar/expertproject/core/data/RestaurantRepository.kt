@@ -22,9 +22,9 @@ class RestaurantRepository @Inject constructor(
     private val dataMapper: DataMapper
 ) : IRestaurantRepository {
 
-    override fun getAllRestaurant(): Flow<com.amar.expertproject.core.data.Resource<List<Restaurant>>> =
+    override fun getAllRestaurant(): Flow<Resource<List<Restaurant>>> =
         object :
-            com.amar.expertproject.core.data.NetworkBoundResource<List<Restaurant>, List<RestaurantResponse>>() {
+            NetworkBoundResource<List<Restaurant>, List<RestaurantResponse>>() {
             override fun loadFromDB(): Flow<List<Restaurant>> {
                 return localDataSource.getAllRestaurant().map { listRestaurant ->
                     listRestaurant.map {
@@ -48,9 +48,9 @@ class RestaurantRepository @Inject constructor(
         }.asFlow()
 
 
-    override fun getDetailRestaurant(id: String): Flow<com.amar.expertproject.core.data.Resource<Restaurant>> =
+    override fun getDetailRestaurant(id: String): Flow<Resource<Restaurant>> =
         object :
-            com.amar.expertproject.core.data.NetworkBoundResource<Restaurant, DetailRestaurantResponse>() {
+            NetworkBoundResource<Restaurant, DetailRestaurantResponse>() {
             override fun loadFromDB(): Flow<Restaurant> {
                 return localDataSource.getDetailRestaurant(id).map {
                     dataMapper.mapEntitiesToDomain(it)

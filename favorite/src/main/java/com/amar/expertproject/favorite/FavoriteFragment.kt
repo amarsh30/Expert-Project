@@ -16,8 +16,6 @@ import javax.inject.Inject
 
 class FavoriteFragment : Fragment() {
 
-//    private val favoriteViewModel: FavoriteViewModel by viewModels()
-
     private var _binding: FragmentFavoriteBinding? = null
 
     @Inject

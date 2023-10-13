@@ -1,7 +1,6 @@
 package com.amar.expertproject.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -54,13 +53,11 @@ class DetailRestaurantActivity : AppCompatActivity() {
                         var statusFavorite = restaurant.isFavorite
                         setStatusFavorite(statusFavorite)
                         binding.fab.setOnClickListener {
-                            Log.d("Status Favorite", "sebelum : $statusFavorite")
                             statusFavorite = !statusFavorite
                             detailRestaurantViewModel.setFavoriteRestaurant(
                                 restaurant,
                                 statusFavorite
                             )
-                            Log.d("Status Favorite", "setelah : $statusFavorite")
                             setStatusFavorite(statusFavorite)
                         }
                     }

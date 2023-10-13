@@ -2,6 +2,7 @@ package com.amar.expertproject.core.di
 
 import com.amar.expertproject.core.data.source.remote.network.ApiService
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -13,7 +14,9 @@ import java.util.concurrent.TimeUnit
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
-    private fun provideOkHttpClient(): OkHttpClient {
+
+    @Provides
+    fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
@@ -21,6 +24,7 @@ class NetworkModule {
             .build()
     }
 
+    @Provides
     fun provideApiService(): ApiService {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://restaurant-api.dicoding.dev/")
