@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface IRestaurantRepository {
 
-    fun getAllRestaurant(): Flow<Resource<List<Restaurant>>>
-    fun getDetailRestaurant(idRestaurant: String): Flow<Resource<Restaurant>>
+    fun getAllRestaurant(): Flow<com.amar.expertproject.core.data.Resource<List<Restaurant>>>
+    fun getDetailRestaurant(idRestaurant: String): Flow<com.amar.expertproject.core.data.Resource<Restaurant>>
 
     fun getFavoriteRestaurant(): Flow<List<Restaurant>>
 

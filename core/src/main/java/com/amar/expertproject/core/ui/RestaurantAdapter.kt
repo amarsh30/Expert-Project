@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.amar.expertproject.R
+import com.amar.expertproject.core.R
+import com.amar.expertproject.core.databinding.ItemListRestaurantBinding
 import com.amar.expertproject.core.domain.model.Restaurant
-import com.amar.expertproject.databinding.ItemListRestaurantBinding
 import com.bumptech.glide.Glide
 
 class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ListViewHolder>() {

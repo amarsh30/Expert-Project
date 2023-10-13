@@ -49,12 +49,12 @@ class HomeFragment : Fragment() {
             homeViewModel.restaurant.observe(viewLifecycleOwner, { restaurant ->
                 if (restaurant != null) {
                     when (restaurant) {
-                        is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
-                        is Resource.Success -> {
+                        is com.amar.expertproject.core.data.Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                        is com.amar.expertproject.core.data.Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             restaurantAdapter.setData(restaurant.data)
                         }
-                        is Resource.Error -> {
+                        is com.amar.expertproject.core.data.Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
                             binding.viewError.root.visibility = View.VISIBLE
                             binding.viewError.tvError.text = restaurant.message ?: getString(R.string.something_wrong)

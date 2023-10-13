@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.amar.expertproject.R
-import com.amar.expertproject.core.data.Resource
 import com.amar.expertproject.databinding.ActivityDetailRestaurantBinding
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,11 +34,11 @@ class DetailRestaurantActivity : AppCompatActivity() {
     private fun showDetailRestaurant(idRestaurant: String) {
         detailRestaurantViewModel.getRestaurantDetail(idRestaurant).observe(this) { resources ->
             when (resources) {
-                is Resource.Loading -> {
+                is com.amar.expertproject.core.data.Resource.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
 
-                is Resource.Success -> {
+                is com.amar.expertproject.core.data.Resource.Success -> {
                     resources.data?.let { restaurant ->
                         binding.apply {
                             progressBar.visibility = View.GONE
@@ -67,7 +66,7 @@ class DetailRestaurantActivity : AppCompatActivity() {
                     }
                 }
 
-                is Resource.Error -> {
+                is com.amar.expertproject.core.data.Resource.Error -> {
                     binding.progressBar.visibility = View.GONE
                     binding.viewError.root.visibility = View.VISIBLE
                     binding.viewError.tvError.text =

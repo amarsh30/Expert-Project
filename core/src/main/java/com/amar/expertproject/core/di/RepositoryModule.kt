@@ -11,5 +11,5 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
     @Binds
-    abstract fun provideRepository(restaurantRepository: RestaurantRepository): IRestaurantRepository
+    abstract fun provideRepository(restaurantRepository: com.amar.expertproject.core.data.RestaurantRepository): IRestaurantRepository
 }

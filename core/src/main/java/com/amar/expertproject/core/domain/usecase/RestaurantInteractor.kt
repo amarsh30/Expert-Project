@@ -11,7 +11,7 @@ class RestaurantInteractor @Inject constructor(private val restaurantRepository:
     override fun getAllRestaurant() = restaurantRepository.getAllRestaurant()
 
     override fun getFavoriteRestaurant() = restaurantRepository.getFavoriteRestaurant()
-    override fun getDetailRestaurant(idRestaurant: String): Flow<Resource<Restaurant>> =
+    override fun getDetailRestaurant(idRestaurant: String): Flow<com.amar.expertproject.core.data.Resource<Restaurant>> =
         restaurantRepository.getDetailRestaurant(idRestaurant)
 
     override fun setFavoriteRestaurant(restaurant: Restaurant, isFavorite: Boolean) = restaurantRepository.setFavoriteRestaurant(restaurant, isFavorite)
