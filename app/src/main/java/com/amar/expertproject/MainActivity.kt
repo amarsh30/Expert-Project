@@ -2,12 +2,12 @@ package com.amar.expertproject
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.amar.expertproject.databinding.ActivityMainBinding
-import com.amar.expertproject.favorite.FavoriteFragment
 import com.amar.expertproject.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,7 +52,13 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 title = getString(R.string.app_name)
             }
             R.id.nav_favorite -> {
-                fragment = FavoriteFragment()
+                try {
+                    val favoriteClassName = "$packageName.favorite.FavoriteFragment"
+                    fragment = Class.forName(favoriteClassName).newInstance() as Fragment
+                    title = getString(R.string.favorite)
+                } catch (e: Exception) {
+                    Toast.makeText(this, e.message.toString(), Toast.LENGTH_SHORT).show()
+                }
                 title = getString(R.string.menu_favorite)
             }
         }

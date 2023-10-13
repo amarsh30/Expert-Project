@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.dynamic-feature'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
@@ -8,15 +8,11 @@ plugins {
 apply from: '../shared_dependencies.gradle'
 
 android {
-    namespace 'com.amar.expertproject'
+    namespace 'com.amar.expertproject.favorite'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.amar.expertproject"
-        minSdk 16
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        minSdk 24
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,14 +31,15 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
+
     buildFeatures {
         viewBinding = true
     }
-    dynamicFeatures = [':favorite']
 }
 
 dependencies {
-
+    implementation project(":app")
     implementation project(":core")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
 }

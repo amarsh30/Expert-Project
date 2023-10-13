@@ -12,4 +12,5 @@
     <string name="name_restaurant">Name Restaurant</string>
     <string name="city">Kota :</string>
     <string name="description">Deskripsi :</string>
+    <string name="title_favorite">Favorite</string>
 </resources>
