@@ -1,15 +1,3 @@
 <resources>
-    <string name="app_name">Restaurant App</string>
-    <string name="image_description">Image</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_favorite">Favorite</string>
-    <string name="favorite">Favorite</string>
-    <string name="title_activity_detail_home">DetailHomeActivity</string>
-    <string name="no_data">Empty data</string>
-    <string name="something_wrong">Oops.. something went wrong</string>
-    <string name="name_restaurant">Name Restaurant</string>
-    <string name="city">Kota :</string>
-    <string name="description">Deskripsi :</string>
+    <string name="app_name">ExpertProject</string>
 </resources>
