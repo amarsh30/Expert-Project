@@ -1,6 +1,5 @@
 package com.amar.expertproject.core.di
 
-import com.amar.expertproject.core.data.RestaurantRepository
 import com.amar.expertproject.core.domain.repository.IRestaurantRepository
 import dagger.Binds
 import dagger.Module

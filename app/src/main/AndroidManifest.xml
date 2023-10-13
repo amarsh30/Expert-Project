@@ -18,7 +18,7 @@
         <activity
             android:name=".detail.DetailRestaurantActivity"
             android:exported="false"
-            android:theme="@style/Theme.ExpertProject.NoActionBar"/>
+            android:theme="@style/Theme.ExpertProject.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

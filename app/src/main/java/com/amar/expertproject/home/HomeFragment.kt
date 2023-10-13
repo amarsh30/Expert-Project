@@ -46,23 +46,25 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
 
-            homeViewModel.restaurant.observe(viewLifecycleOwner, { restaurant ->
+            homeViewModel.restaurant.observe(viewLifecycleOwner) { restaurant ->
                 if (restaurant != null) {
                     when (restaurant) {
-                        is com.amar.expertproject.core.data.Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
-                        is com.amar.expertproject.core.data.Resource.Success -> {
+                        is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                        is Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             restaurantAdapter.setData(restaurant.data)
                         }
-                        is com.amar.expertproject.core.data.Resource.Error -> {
+
+                        is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
                             binding.viewError.root.visibility = View.VISIBLE
-                            binding.viewError.tvError.text = restaurant.message ?: getString(R.string.something_wrong)
+                            binding.viewError.tvError.text =
+                                restaurant.message ?: getString(R.string.something_wrong)
                         }
 
                     }
                 }
-            })
+            }
 
             with(binding.rvRestaurant) {
                 layoutManager = LinearLayoutManager(context)

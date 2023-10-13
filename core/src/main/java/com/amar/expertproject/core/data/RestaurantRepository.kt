@@ -1,6 +1,5 @@
 package com.amar.expertproject.core.data
 
-import android.util.Log
 import com.amar.expertproject.core.data.source.local.LocalDataSource
 import com.amar.expertproject.core.data.source.remote.RemoteDataSource
 import com.amar.expertproject.core.data.source.remote.network.ApiResponse
@@ -24,7 +23,8 @@ class RestaurantRepository @Inject constructor(
 ) : IRestaurantRepository {
 
     override fun getAllRestaurant(): Flow<com.amar.expertproject.core.data.Resource<List<Restaurant>>> =
-        object : com.amar.expertproject.core.data.NetworkBoundResource<List<Restaurant>, List<RestaurantResponse>>() {
+        object :
+            com.amar.expertproject.core.data.NetworkBoundResource<List<Restaurant>, List<RestaurantResponse>>() {
             override fun loadFromDB(): Flow<List<Restaurant>> {
                 return localDataSource.getAllRestaurant().map { listRestaurant ->
                     listRestaurant.map {
@@ -49,33 +49,33 @@ class RestaurantRepository @Inject constructor(
 
 
     override fun getDetailRestaurant(id: String): Flow<com.amar.expertproject.core.data.Resource<Restaurant>> =
-        object : com.amar.expertproject.core.data.NetworkBoundResource<Restaurant, DetailRestaurantResponse>() {
-        override fun loadFromDB(): Flow<Restaurant> {
-            return localDataSource.getDetailRestaurant(id).map {
-                dataMapper.mapEntitiesToDomain(it)
+        object :
+            com.amar.expertproject.core.data.NetworkBoundResource<Restaurant, DetailRestaurantResponse>() {
+            override fun loadFromDB(): Flow<Restaurant> {
+                return localDataSource.getDetailRestaurant(id).map {
+                    dataMapper.mapEntitiesToDomain(it)
+
+                }
+            }
+
+            override fun shouldFetch(data: Restaurant?): Boolean {
+                return data?.run {
+                    name.isNullOrEmpty() || pictureId.isNullOrEmpty() || description.isNullOrEmpty() || rating == null || city.isNullOrEmpty()
+                } ?: false
 
             }
-        }
 
-        override fun shouldFetch(data: Restaurant?): Boolean {
-            return  data?.run {
-                name.isNullOrEmpty() || pictureId.isNullOrEmpty() || description.isNullOrEmpty() || rating == null || city.isNullOrEmpty()
-            } ?: false
-
-        }
-
-        override suspend fun createCall(): Flow<ApiResponse<DetailRestaurantResponse>> =
-            remoteDataSource.getDetailRestaurant(id)
+            override suspend fun createCall(): Flow<ApiResponse<DetailRestaurantResponse>> =
+                remoteDataSource.getDetailRestaurant(id)
 
             override suspend fun saveCallResult(data: DetailRestaurantResponse) {
-            localDataSource.getDetailRestaurant(id)
-        }
-    }.asFlow()
-
+                localDataSource.getDetailRestaurant(id)
+            }
+        }.asFlow()
 
 
     override fun getFavoriteRestaurant(): Flow<List<Restaurant>> {
-        return localDataSource.getFavoriteRestaurant().map {listFavorite ->
+        return localDataSource.getFavoriteRestaurant().map { listFavorite ->
             listFavorite.map {
                 dataMapper.mapEntitiesToDomain(it)
             }
@@ -84,6 +84,7 @@ class RestaurantRepository @Inject constructor(
 
     override fun setFavoriteRestaurant(restaurant: Restaurant, state: Boolean) {
         val restaurantEntity = dataMapper.mapDomainToEntity(restaurant)
-        appExecutors.diskIO().execute { localDataSource.setFavoriteRestaurant(restaurantEntity, state) }
+        appExecutors.diskIO()
+            .execute { localDataSource.setFavoriteRestaurant(restaurantEntity, state) }
     }
 }

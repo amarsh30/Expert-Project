@@ -10,7 +10,8 @@ interface ApiService {
     suspend fun getAllList(): ListRestaurantResponse
 
     @GET("detail/{id}")
-    suspend fun getDetail(@Path("id") id: String
+    suspend fun getDetail(
+        @Path("id") id: String
     ): DetailRestaurantResponse
 
 }

@@ -17,10 +17,11 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context): RestaurantDatabase = Room.databaseBuilder(
-        context,
-        RestaurantDatabase::class.java, "Restaurant.db"
-    ).fallbackToDestructiveMigration().build()
+    fun provideDatabase(@ApplicationContext context: Context): RestaurantDatabase =
+        Room.databaseBuilder(
+            context,
+            RestaurantDatabase::class.java, "Restaurant.db"
+        ).fallbackToDestructiveMigration().build()
 
     @Provides
     fun provideRestaurantDao(database: RestaurantDatabase): RestaurantDao = database.restaurantDao()

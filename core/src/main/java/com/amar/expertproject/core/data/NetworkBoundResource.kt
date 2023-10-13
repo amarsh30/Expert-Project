@@ -19,9 +19,11 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                     saveCallResult(apiResponse.data)
                     emitAll(loadFromDB().map { com.amar.expertproject.core.data.Resource.Success(it) })
                 }
+
                 is ApiResponse.Empty -> {
                     emitAll(loadFromDB().map { com.amar.expertproject.core.data.Resource.Success(it) })
                 }
+
                 is ApiResponse.Error -> {
                     onFetchFailed()
                     emit(com.amar.expertproject.core.data.Resource.Error<ResultType>(apiResponse.errorMessage))
@@ -31,7 +33,6 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             emitAll(loadFromDB().map { com.amar.expertproject.core.data.Resource.Success(it) })
         }
     }
-
 
 
     protected open fun onFetchFailed() {}

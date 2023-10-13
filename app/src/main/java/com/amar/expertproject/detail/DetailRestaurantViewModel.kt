@@ -8,11 +8,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailRestaurantViewModel @Inject constructor(private val restaurantUseCase: RestaurantUseCase) : ViewModel() {
+class DetailRestaurantViewModel @Inject constructor(private val restaurantUseCase: RestaurantUseCase) :
+    ViewModel() {
 
     fun getRestaurantDetail(idRestaurant: String) =
         restaurantUseCase.getDetailRestaurant(idRestaurant).asLiveData()
 
-    fun setFavoriteRestaurant(restaurant: Restaurant, isFavorite:Boolean) =
+    fun setFavoriteRestaurant(restaurant: Restaurant, isFavorite: Boolean) =
         restaurantUseCase.setFavoriteRestaurant(restaurant, isFavorite)
 }

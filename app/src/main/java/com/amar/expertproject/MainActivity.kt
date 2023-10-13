@@ -1,6 +1,8 @@
 package com.amar.expertproject
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -13,7 +15,7 @@ import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 fragment = HomeFragment()
                 title = getString(R.string.app_name)
             }
+
             R.id.nav_favorite -> {
                 try {
                     val favoriteClassName = "$packageName.favorite.FavoriteFragment"
@@ -60,6 +63,10 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                     Toast.makeText(this, e.message.toString(), Toast.LENGTH_SHORT).show()
                 }
                 title = getString(R.string.menu_favorite)
+            }
+
+            R.id.nav_setting -> {
+                startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
             }
         }
         if (fragment != null) {

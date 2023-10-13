@@ -1,6 +1,5 @@
 package com.amar.expertproject.core.domain.usecase
 
-import com.amar.expertproject.core.data.Resource
 import com.amar.expertproject.core.domain.model.Restaurant
 import kotlinx.coroutines.flow.Flow
 

@@ -18,7 +18,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/image_description" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -29,7 +30,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvDetailName"
             app:layout_constraintStart_toEndOf="@+id/tvDetailName"
             app:layout_constraintTop_toTopOf="@+id/tvDetailName"
-            app:srcCompat="@drawable/ic_star_rate_24" />
+            app:srcCompat="@drawable/ic_star_rate_24"
+            android:contentDescription="@string/rating" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -48,7 +50,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="24dp"
-            android:text="Padang"
+            android:text="@string/name_restaurant"
             style="@style/TextAppearance"
             app:layout_constraintBottom_toBottomOf="@+id/ivDetailImage"
             app:layout_constraintStart_toStartOf="@+id/ivDetailImage" />
@@ -109,7 +111,8 @@
             android:layout_marginRight="24dp"
             app:layout_constraintBottom_toTopOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_not_favorite_white" />
+            app:srcCompat="@drawable/ic_not_favorite_white"
+            android:contentDescription="@string/favorite" />
 
         <include
             android:id="@+id/view_error"
@@ -126,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
-            android:text="4.2"
+            android:text="@string/rating"
             android:textSize="18sp"
             android:textColor="@color/colorOnPrimary"
             android:textStyle="bold"
@@ -153,7 +156,8 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="@+id/ivDetailImage"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_arrow_back" />
+            app:srcCompat="@drawable/ic_arrow_back"
+            android:contentDescription="@string/back" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

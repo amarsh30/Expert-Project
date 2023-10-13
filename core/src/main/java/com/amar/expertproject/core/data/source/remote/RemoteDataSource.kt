@@ -13,7 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class RemoteDataSource @Inject constructor(private val apiService: ApiService){
+class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
 
     suspend fun getAllRestaurant(): Flow<ApiResponse<List<RestaurantResponse>>> {
         //get data from remote api
@@ -21,12 +21,12 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService){
             try {
                 val response = apiService.getAllList()
                 val dataArray = response.restaurants
-                if (dataArray.isNotEmpty()){
+                if (dataArray.isNotEmpty()) {
                     emit(ApiResponse.Success(response.restaurants))
                 } else {
                     emit(ApiResponse.Empty)
                 }
-            } catch (e : Exception){
+            } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))
                 Log.e("RemoteDataSource", e.toString())
             }
@@ -38,7 +38,7 @@ class RemoteDataSource @Inject constructor(private val apiService: ApiService){
             try {
                 val response = apiService.getDetail(id)
                 emit(ApiResponse.Success(response))
-            } catch (e : Exception){
+            } catch (e: Exception) {
                 emit(ApiResponse.Error(e.toString()))
                 Log.e("RemoteDataSource", e.toString())
             }

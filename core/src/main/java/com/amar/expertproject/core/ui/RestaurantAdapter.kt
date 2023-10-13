@@ -22,7 +22,10 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ListViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_restaurant, parent, false))
+        ListViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_list_restaurant, parent, false)
+        )
 
     override fun getItemCount() = listData.size
 

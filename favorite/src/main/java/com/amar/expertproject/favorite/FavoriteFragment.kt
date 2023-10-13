@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amar.expertproject.core.ui.RestaurantAdapter
-import com.amar.expertproject.di.FavoriteDependencies
-import com.amar.expertproject.databinding.FragmentFavoriteBinding
 import com.amar.expertproject.detail.DetailRestaurantActivity
+import com.amar.expertproject.di.FavoriteDependencies
+import com.amar.expertproject.favorite.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.EntryPointAccessors
 import javax.inject.Inject
 

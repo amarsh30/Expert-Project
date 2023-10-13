@@ -5,7 +5,8 @@ import com.amar.expertproject.core.data.source.remote.response.RestaurantRespons
 import com.amar.expertproject.core.domain.model.Restaurant
 import javax.inject.Inject
 
-open class DataMapper @Inject constructor() : Mapper<RestaurantEntity, Restaurant, RestaurantResponse> {
+open class DataMapper @Inject constructor() :
+    Mapper<RestaurantEntity, Restaurant, RestaurantResponse> {
     override fun mapEntitiesToDomain(type: RestaurantEntity): Restaurant {
         return Restaurant(
             restaurantId = type.restaurantId,
