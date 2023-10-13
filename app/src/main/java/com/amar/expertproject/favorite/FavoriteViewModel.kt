@@ -6,7 +6,7 @@ import com.amar.expertproject.core.domain.usecase.RestaurantUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@HiltViewModel
+
 class FavoriteViewModel @Inject constructor(restaurantUseCase: RestaurantUseCase) : ViewModel() {
     val favoriteRestaurant = restaurantUseCase.getFavoriteRestaurant().asLiveData()
 }

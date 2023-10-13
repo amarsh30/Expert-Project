@@ -1,4 +1,4 @@
-package com.amar.expertproject.core.ui.di
+package com.amar.expertproject.di
 
 import com.amar.expertproject.core.domain.usecase.RestaurantInteractor
 import com.amar.expertproject.core.domain.usecase.RestaurantUseCase

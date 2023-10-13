@@ -9,17 +9,39 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amar.expertproject.core.ui.RestaurantAdapter
+import com.amar.expertproject.di.FavoriteDependencies
 import com.amar.expertproject.databinding.FragmentFavoriteBinding
 import com.amar.expertproject.detail.DetailRestaurantActivity
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.EntryPointAccessors
+import javax.inject.Inject
 
-@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
-    private val favoriteViewModel: FavoriteViewModel by viewModels()
+//    private val favoriteViewModel: FavoriteViewModel by viewModels()
 
     private var _binding: FragmentFavoriteBinding? = null
+
+    @Inject
+    lateinit var favoriteViewModel: FavoriteViewModel
     private val binding get() = _binding!!
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        initDaggerFavorite()
+        super.onCreate(savedInstanceState)
+
+    }
+
+    private fun initDaggerFavorite() {
+        val coreDependencies = EntryPointAccessors.fromApplication(
+            requireContext().applicationContext,
+            FavoriteDependencies::class.java
+        )
+        DaggerFavoriteComponent.builder()
+            .context(requireContext())
+            .dependencies(coreDependencies)
+            .build().inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
