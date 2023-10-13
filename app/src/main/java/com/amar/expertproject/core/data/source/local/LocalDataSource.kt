@@ -17,8 +17,8 @@ class LocalDataSource @Inject constructor(private val restaurantDao: RestaurantD
 
     suspend fun insertRestaurant(restaurantList: List<RestaurantEntity>) = restaurantDao.insertRestaurant(restaurantList)
 
-    fun setFavoriteRestaurant(restaurant: RestaurantEntity, newState: Boolean) {
-        restaurant.isFavorite = newState
+    fun setFavoriteRestaurant(restaurant: RestaurantEntity, isFavorite: Boolean) {
+        restaurant.isFavorite = isFavorite
         restaurantDao.updateFavoriteRestaurant(restaurant)
     }
 }

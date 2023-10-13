@@ -11,5 +11,5 @@ interface IRestaurantRepository {
 
     fun getFavoriteRestaurant(): Flow<List<Restaurant>>
 
-    fun setFavoriteRestaurant(restaurant: Restaurant, state: Boolean)
+    fun setFavoriteRestaurant(restaurant: Restaurant, isFavorite: Boolean)
 }

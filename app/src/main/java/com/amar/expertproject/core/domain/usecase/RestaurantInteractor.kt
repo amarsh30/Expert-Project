@@ -14,5 +14,5 @@ class RestaurantInteractor @Inject constructor(private val restaurantRepository:
     override fun getDetailRestaurant(idRestaurant: String): Flow<Resource<Restaurant>> =
         restaurantRepository.getDetailRestaurant(idRestaurant)
 
-    override fun setFavoriteRestaurant(restaurant: Restaurant, state: Boolean) = restaurantRepository.setFavoriteRestaurant(restaurant, state)
+    override fun setFavoriteRestaurant(restaurant: Restaurant, isFavorite: Boolean) = restaurantRepository.setFavoriteRestaurant(restaurant, isFavorite)
 }
