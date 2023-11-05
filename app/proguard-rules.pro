@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class dagger.** { *; }
+-keep class com.amar.expertproject.di.FavoriteDependencies { *; }
+-keep class com.amar.expertproject.core.domain.usecase.RestaurantUseCase { *; }
+-keep class com.amar.expertproject.favorite.** { *; }
+-keep class androidx.viewbinding.ViewBinding { *; }
