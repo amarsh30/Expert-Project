@@ -14,6 +14,7 @@ import com.amar.expertproject.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -58,7 +59,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 try {
                     val favoriteClassName = "$packageName.favorite.FavoriteFragment"
                     fragment = Class.forName(favoriteClassName).newInstance() as Fragment
-                    title = getString(R.string.favorite)
                 } catch (e: Exception) {
                     Toast.makeText(this, e.message.toString(), Toast.LENGTH_SHORT).show()
                 }
