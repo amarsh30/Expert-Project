@@ -14,6 +14,7 @@ import com.amar.expertproject.home.HomeFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
+@Suppress("DEPRECATION")
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

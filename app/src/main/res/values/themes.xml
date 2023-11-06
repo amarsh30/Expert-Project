@@ -31,9 +31,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-<!--    <style name="ToolbarNavigationIcon" parent="Theme.ExpertProject">-->
-<!--        <item name="android:textColorSecondary">@color/colorOnSecondary</item>-->
-<!--    </style>-->
 
     <style name="Theme.ExpertProject.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -47,8 +44,6 @@
     <style name="TextAppearance">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/md_theme_light_onPrimary</item>
-        <item name="background">@color/md_theme_light_onPrimaryContainer</item>
-        <item name="backgroundTint">@color/md_theme_light_onPrimaryContainer</item>
         <item name="borderWidth">2dp</item>
         <item name="android:padding">8dp</item>
         <item name="android:textStyle">bold</item>
@@ -56,13 +51,11 @@
 
     <style name="TextBold">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/md_theme_light_onPrimaryContainer</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextRegular">
         <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/md_theme_light_onPrimaryContainer</item>
     </style>
 
 </resources>

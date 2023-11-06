@@ -9,12 +9,12 @@ apply from: '../shared_dependencies.gradle'
 
 android {
     namespace 'com.amar.expertproject'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.amar.expertproject"
         minSdk 16
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -49,4 +49,7 @@ dependencies {
 
     implementation project(":core")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }
