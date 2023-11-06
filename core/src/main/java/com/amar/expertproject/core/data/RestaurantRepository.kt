@@ -48,11 +48,11 @@ class RestaurantRepository @Inject constructor(
         }.asFlow()
 
 
-    override fun getDetailRestaurant(id: String): Flow<Resource<Restaurant>> =
+    override fun getDetailRestaurant(idRestaurant: String): Flow<Resource<Restaurant>> =
         object :
             NetworkBoundResource<Restaurant, DetailRestaurantResponse>() {
             override fun loadFromDB(): Flow<Restaurant> {
-                return localDataSource.getDetailRestaurant(id).map {
+                return localDataSource.getDetailRestaurant(idRestaurant).map {
                     dataMapper.mapEntitiesToDomain(it)
 
                 }
@@ -60,16 +60,16 @@ class RestaurantRepository @Inject constructor(
 
             override fun shouldFetch(data: Restaurant?): Boolean {
                 return data?.run {
-                    name.isNullOrEmpty() || pictureId.isNullOrEmpty() || description.isNullOrEmpty() || rating == null || city.isNullOrEmpty()
+                    name.isEmpty() || pictureId.isEmpty() || description.isEmpty() || city.isEmpty()
                 } ?: false
 
             }
 
             override suspend fun createCall(): Flow<ApiResponse<DetailRestaurantResponse>> =
-                remoteDataSource.getDetailRestaurant(id)
+                remoteDataSource.getDetailRestaurant(idRestaurant)
 
             override suspend fun saveCallResult(data: DetailRestaurantResponse) {
-                localDataSource.getDetailRestaurant(id)
+                localDataSource.getDetailRestaurant(idRestaurant)
             }
         }.asFlow()
 
@@ -82,9 +82,9 @@ class RestaurantRepository @Inject constructor(
         }
     }
 
-    override fun setFavoriteRestaurant(restaurant: Restaurant, state: Boolean) {
+    override fun setFavoriteRestaurant(restaurant: Restaurant, isFavorite: Boolean) {
         val restaurantEntity = dataMapper.mapDomainToEntity(restaurant)
         appExecutors.diskIO()
-            .execute { localDataSource.setFavoriteRestaurant(restaurantEntity, state) }
+            .execute { localDataSource.setFavoriteRestaurant(restaurantEntity, isFavorite) }
     }
 }

@@ -13,9 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailRestaurantActivity : AppCompatActivity() {
 
-    companion object {
-        const val EXTRA_DATA = "extra_data"
-    }
 
     private val detailRestaurantViewModel: DetailRestaurantViewModel by viewModels()
 
@@ -93,5 +90,9 @@ class DetailRestaurantActivity : AppCompatActivity() {
                 )
             )
         }
+    }
+
+    companion object {
+        const val EXTRA_DATA = "extra_data"
     }
 }

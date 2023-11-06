@@ -1,5 +1,6 @@
 package com.amar.expertproject.core.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ListViewHolder>
     private var listData = ArrayList<Restaurant>()
     var onItemClick: ((Restaurant) -> Unit)? = null
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(newListData: List<Restaurant>?) {
         if (newListData == null) return
         listData.clear()
@@ -34,6 +36,7 @@ class RestaurantAdapter : RecyclerView.Adapter<RestaurantAdapter.ListViewHolder>
         holder.bind(data)
     }
 
+    @Suppress("DEPRECATION")
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemListRestaurantBinding.bind(itemView)
         fun bind(restaurant: Restaurant) {
