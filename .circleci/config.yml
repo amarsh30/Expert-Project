@@ -10,9 +10,23 @@ jobs:
       - checkout
       - restore_cache:
           key: android-orb-v1-
+      - run:
+          name: Install OpenJDK 17
+          command: |
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B53DC80D13EDEF05
+            sudo apt update
+            sudo apt install -y openjdk-17-jdk
       - setup-java:
           jdk: openjdk@17
           version: 17
+      - run:
+          name: Install Google Cloud SDK
+          command: |
+            export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+            echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
+            curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+            sudo apt update
+            sudo apt install -y google-cloud-sdk
       - run:
           name: Chmod permissions
           command: sudo chmod +x ./gradlew
