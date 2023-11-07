@@ -43,9 +43,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    vectorDrawables {
-            useSupportLibrary true
-        }
+   vectorDrawables {
+        useSupportLibrary = true
+    }
     dynamicFeatures = [':favorite']
 }
 
