@@ -20,6 +20,7 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        
     }
 
     buildTypes {
@@ -42,6 +43,9 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    vectorDrawables {
+            useSupportLibrary true
+        }
     dynamicFeatures = [':favorite']
 }
 
