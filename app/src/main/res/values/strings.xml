@@ -7,8 +7,6 @@
     <string name="menu_favorite">Favorite</string>
     <string name="menu_setting">Setting</string>
     <string name="favorite">Favorite</string>
-    <string name="title_activity_detail_home">DetailHomeActivity</string>
-    <string name="no_data">Empty data</string>
     <string name="something_wrong">Oops.. something went wrong</string>
     <string name="name_restaurant">Name Restaurant</string>
     <string name="city">City :</string>

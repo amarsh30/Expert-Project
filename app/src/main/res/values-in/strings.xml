@@ -8,8 +8,6 @@
     <string name="menu_favorite">Disukai</string>
     <string name="menu_setting">Pengaturan</string>
     <string name="favorite">Disukai</string>
-    <string name="title_activity_detail_home">DetailBerandaActivity</string>
-    <string name="no_data">Data Kosong</string>
     <string name="something_wrong">Oops.. Ada sesuatu yang salah</string>
     <string name="name_restaurant">Nama Restoran</string>
     <string name="city">Kota :</string>
